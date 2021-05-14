@@ -1,5 +1,5 @@
 {
-  "name": "alex/hyperf-grpc-service",
+  "name": "alex-qiu/hyperf-grpc-service",
   "description": "hyperf gprc service register to consul",
   "type": "library",
   "license": "MIT",
