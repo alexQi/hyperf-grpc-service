@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace GrpcService;
 
+use GrpcService\Exception\Handler\GrpcExceptionHandler;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\ExceptionHandler\ExceptionHandlerDispatcher;
 use Hyperf\HttpMessage\Server\Request as Psr7Request;
@@ -22,7 +23,6 @@ use Hyperf\HttpServer\MiddlewareManager;
 use Hyperf\HttpServer\ResponseEmitter;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\HttpServer\Server as HttpServer;
-use GrpcService\Exception\Handler\GrpcExceptionHandler;
 use Hyperf\Rpc\Protocol;
 use Hyperf\Rpc\ProtocolManager;
 use Hyperf\RpcServer\RequestDispatcher;

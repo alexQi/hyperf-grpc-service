@@ -1,22 +1,14 @@
 {
-  "name": "alex/grpc-service",
+  "name": "alex/hyperf-grpc-service",
+  "description": "hyperf gprc service register to consul",
   "type": "library",
   "license": "MIT",
-  "keywords": [
-    "php",
-    "hyperf"
+  "authors": [
+    {
+      "name": "alex",
+      "email": "alex.qiubo@qq.com"
+    }
   ],
-  "description": "grpc service with consul",
-  "autoload": {
-    "psr-4": {
-      "GrpcService\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "HyperfTest\\": "tests"
-    }
-  },
   "require": {
     "php": ">=7.2",
     "google/protobuf": "^3.16",
@@ -38,6 +30,21 @@
     "swow/swow": "dev-develop",
     "symfony/var-dumper": "^5.1"
   },
+  "autoload": {
+    "psr-4": {
+      "GrpcService\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HyperfTest\\": "tests"
+    }
+  },
+  "extra": {
+    "hyperf": {
+      "config": "GrpcService\\ConfigProvider"
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
@@ -48,10 +55,5 @@
     "test": "phpunit -c phpunit.xml --colors=always",
     "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
     "cs-fix": "php-cs-fixer fix $1"
-  },
-  "extra": {
-    "hyperf": {
-      "config": "Hyperf\\GrpcService\\ConfigProvider"
-    }
   }
 }
