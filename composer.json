@@ -9,7 +9,7 @@
   "description": "grpc service with consul",
   "autoload": {
     "psr-4": {
-      "Hyperf\\GrpcService\\": "src/",
+      "Hyperf\\GrpcService\\": "src/"
     }
   },
   "autoload-dev": {
