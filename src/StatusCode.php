@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace Grpc\Service;
+namespace GrpcService;
 
 /**
  * the const inside this class is copied from this address.

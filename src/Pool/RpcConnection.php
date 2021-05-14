@@ -9,10 +9,10 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace Grpc\Service\Pool;
+namespace GrpcService\Pool;
 
 use Hyperf\Contract\ConnectionInterface;
-use Grpc\Service\Exception\ClientException;
+use GrpcService\Exception\ClientException;
 use Hyperf\LoadBalancer\Node;
 use Hyperf\Pool\Connection as BaseConnection;
 use Hyperf\Pool\Exception\ConnectionException;

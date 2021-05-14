@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace Grpc\Service\Pool;
+namespace GrpcService\Pool;
 
 use Hyperf\Di\Container;
 use Hyperf\Di\Exception\NotFoundException;

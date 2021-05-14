@@ -9,10 +9,10 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace Grpc\Service;
+namespace GrpcService;
 
-use Grpc\Service\Listener\RegisterProtocolListener;
-use Grpc\Service\Listener\RegisterServiceListener;
+use GrpcService\Listener\RegisterProtocolListener;
+use GrpcService\Listener\RegisterServiceListener;
 use Hyperf\ServiceGovernance\ServiceManager;
 
 class ConfigProvider

@@ -10,11 +10,11 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service;
+namespace GrpcService;
 
 use Psr\Http\Message\ResponseInterface;
 use Google\Protobuf\Internal\Message;
-use Grpc\Service\Parser;
+use GrpcService\Parser;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Rpc\Context;
 use Hyperf\Rpc\Contract\DataFormatterInterface;
@@ -22,7 +22,7 @@ use Hyperf\Rpc\Contract\DataFormatterInterface;
 /**
  * Class DataFormatter
  *
- * @package Grpc\Service
+ * @package GrpcService
  */
 class DataFormatter implements DataFormatterInterface
 {

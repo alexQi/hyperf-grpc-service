@@ -10,16 +10,16 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service;
+namespace GrpcService;
 
 use Grpc\Health\V1\HealthCheckResponse;
 use Google\Protobuf\Internal\Message;
 use FastRoute\Dispatcher;
 use Hyperf\Di\MethodDefinitionCollector;
 use Hyperf\Di\ReflectionManager;
-use Grpc\Service\Parser;
-use Grpc\Service\Exception\GrpcException;
-use Grpc\Service\ResponseBuilder;
+use GrpcService\Parser;
+use GrpcService\Exception\GrpcException;
+use GrpcService\ResponseBuilder;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Rpc\Protocol;

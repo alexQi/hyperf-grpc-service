@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service;
+namespace GrpcService;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;

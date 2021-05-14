@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\GrpcService;
+namespace GrpcService;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\ExceptionHandler\ExceptionHandlerDispatcher;
@@ -22,8 +22,7 @@ use Hyperf\HttpServer\MiddlewareManager;
 use Hyperf\HttpServer\ResponseEmitter;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\HttpServer\Server as HttpServer;
-use Hyperf\GrpcService\Exception\Handler\GrpcExceptionHandler;
-use Hyperf\Rpc\Context as RpcContext;
+use GrpcService\Exception\Handler\GrpcExceptionHandler;
 use Hyperf\Rpc\Protocol;
 use Hyperf\Rpc\ProtocolManager;
 use Hyperf\RpcServer\RequestDispatcher;
@@ -50,7 +49,7 @@ class Server extends HttpServer
     protected $packer;
 
     /**
-     * @var \Hyperf\GrpcService\ResponseBuilder
+     * @var \GrpcService\ResponseBuilder
      */
     protected $responseBuilder;
 

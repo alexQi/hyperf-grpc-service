@@ -9,9 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace Grpc\Service;
+namespace GrpcService;
 
-use Grpc\Service\Pool\RpcConnection;
+use GrpcService\Pool\RpcConnection;
 use Hyperf\Rpc\Exception\RecvException;
 use Swoole\Coroutine\Client;
 

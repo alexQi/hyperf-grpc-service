@@ -10,12 +10,12 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\GrpcService\Exception\Handler;
+namespace GrpcService\Exception\Handler;
 
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
-use Hyperf\GrpcService\StatusCode;
+use GrpcService\StatusCode;
 use Hyperf\GrpcServer\Exception\GrpcException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;

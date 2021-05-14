@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service\Packer;
+namespace GrpcService\Packer;
 
 use Hyperf\Contract\PackerInterface;
-use Grpc\Service\Parser;
+use GrpcService\Parser;
 
 class GrpcPacker implements PackerInterface
 {

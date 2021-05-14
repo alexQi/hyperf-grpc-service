@@ -10,15 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service\Listener;
+namespace GrpcService\Listener;
 
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
-use Grpc\Service\DataFormatter;
-use Grpc\Service\GrpcHttpTransporter;
-use Grpc\Service\Packer\GrpcPacker;
-use Grpc\Service\Packer\GrpcLengthPacker;
-use Grpc\Service\PathGenerator;
+use GrpcService\DataFormatter;
+use GrpcService\GrpcHttpTransporter;
+use GrpcService\Packer\GrpcPacker;
+use GrpcService\Packer\GrpcLengthPacker;
+use GrpcService\PathGenerator;
 use Hyperf\Rpc\ProtocolManager;
 
 class RegisterProtocolListener implements ListenerInterface

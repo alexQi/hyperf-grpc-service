@@ -10,11 +10,11 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service;
+namespace GrpcService;
 
 use Google\Protobuf\Internal\Message;
 use Hyperf\Contract\PackerInterface;
-use Grpc\Service\Exception\GrpcException;
+use GrpcService\Exception\GrpcException;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Rpc\Contract\DataFormatterInterface;
 use Hyperf\Utils\Context;

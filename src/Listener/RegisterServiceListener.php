@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Grpc\Service\Listener;
+namespace GrpcService\Listener;
 
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\RpcServer\Event\AfterPathRegister;
