@@ -85,7 +85,7 @@ class ResponseBuilder
             ->withAddedHeader('Content-Type', 'application/grpc+proto')
             ->withAddedHeader('trailer', 'grpc-status, grpc-message')
             ->withTrailer('grpc-status', $code)
-            ->withTrailer('grpc-message', $message . ",invoke:" . $request->getUri()->getPath());
+            ->withTrailer('grpc-message', $message);
     }
 
     /**
@@ -107,16 +107,18 @@ class ResponseBuilder
     protected function error(int $code, \Throwable $error = null): array
     {
         $mapping = [
+            self::SERVER_ERROR     => 'Server error',
             self::PARSE_ERROR      => 'Parse error',
             self::INVALID_REQUEST  => 'Invalid request',
             self::METHOD_NOT_FOUND => 'Method not found',
             self::INVALID_PARAMS   => 'Invalid params',
             self::INTERNAL_ERROR   => 'Internal error',
         ];
-
-        $message = $mapping[$code] ?? ($error ? $error->getMessage() : '');
-
-        return [(string)$code, $message ?? ''];
+        $message = $mapping[$code] ?? "Unkown error";
+        if ($error) {
+            $message .= ',' . $error->getMessage();
+        }
+        return [(string)$code, $message];
     }
 
     /**

@@ -15,11 +15,11 @@ namespace GrpcService;
 use Grpc\Health\V1\HealthCheckResponse;
 use Google\Protobuf\Internal\Message;
 use FastRoute\Dispatcher;
-use Hyperf\Di\MethodDefinitionCollector;
-use Hyperf\Di\ReflectionManager;
 use GrpcService\Parser;
 use GrpcService\Exception\GrpcException;
 use GrpcService\ResponseBuilder;
+use Hyperf\Di\MethodDefinitionCollector;
+use Hyperf\Di\ReflectionManager;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Rpc\Protocol;
@@ -30,6 +30,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Class CoreMiddleware
+ *
+ * @package GrpcService
+ */
 class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
 {
     /**
@@ -68,22 +73,19 @@ class CoreMiddleware extends \Hyperf\RpcServer\CoreMiddleware
         } catch (\InvalidArgumentException $exception) {
             return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::INVALID_PARAMS);
         }
+
         try {
-            $response = $controllerInstance->{$action}(...$parameters);
+            $response = $controllerInstance->$action(...$parameters);
+            if (!$response instanceof Message) {
+                throw new \Exception("return value is not instance from Message:" . json_encode($response));
+            }
         } catch (\Throwable $exception) {
-            $response = $this->responseBuilder->buildErrorResponse(
+            return $this->responseBuilder->buildErrorResponse(
                 $request,
                 ResponseBuilder::SERVER_ERROR,
                 $exception
             );
-            $this->responseBuilder->persistToContext($response);
-
-            throw $exception;
         }
-        if (!$response instanceof Message) {
-            return $this->responseBuilder->buildErrorResponse($request, ResponseBuilder::SERVER_ERROR);
-        }
-
         return $this->responseBuilder->buildResponse($response);
     }
 
