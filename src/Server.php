@@ -14,6 +14,7 @@ namespace GrpcService;
 
 use GrpcService\Exception\Handler\GrpcExceptionHandler;
 use Hyperf\Contract\ConfigInterface;
+use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandlerDispatcher;
 use Hyperf\HttpMessage\Server\Request as Psr7Request;
 use Hyperf\HttpMessage\Server\Response as Psr7Response;
@@ -52,6 +53,10 @@ class Server extends HttpServer
      * @var \GrpcService\ResponseBuilder
      */
     protected $responseBuilder;
+    /**
+     * @var StdoutLoggerInterface
+     */
+    protected $logger;
 
     public function __construct(
         ContainerInterface $container,
@@ -63,6 +68,7 @@ class Server extends HttpServer
         parent::__construct($container, $dispatcher, $exceptionHandlerDispatcher, $responseEmitter);
         $this->protocol = new Protocol($container, $protocolManager, 'grpc');
         $this->packer   = $this->protocol->getPacker();
+        $this->logger = $container->get(StdoutLoggerInterface::class);
 
         $this->responseBuilder = make(
             ResponseBuilder::class,
@@ -155,6 +161,8 @@ class Server extends HttpServer
 
         if (!$this->isHealthCheck($psr7Request)) {
             $uri_string  = $psr7Request->getUri()->getPath();
+            $this->logger->debug("request uri:".$uri_string);
+
             $uri_array   = explode('/', $uri_string);
             $method      = end($uri_array);
             $temp_uri    = Str::replaceLast($method, "", $uri_string);

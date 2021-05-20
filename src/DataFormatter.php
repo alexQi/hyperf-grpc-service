@@ -36,11 +36,14 @@ class DataFormatter implements DataFormatterInterface
         $this->context = $context;
     }
 
-    public function formatRequest($handler)
+    public function formatRequest($data)
     {
-        if (is_array($handler) && isset($handler[0], $handler[1])) {
-            return $handler;
-        }
+        [$path, $params, $id] = $data;
+        return [
+            'method' => $path,
+            'params' => $params,
+            'id'     => $id,
+        ];
     }
 
     public function formatResponse($data)

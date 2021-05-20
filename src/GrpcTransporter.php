@@ -9,14 +9,18 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace GrpcService;
 
+use Hyperf\GrpcClient\BaseClient;
+use Hyperf\GrpcClient\Request;
 use Hyperf\LoadBalancer\LoadBalancerInterface;
 use Hyperf\LoadBalancer\Node;
 use Hyperf\Rpc\Contract\TransporterInterface;
+use Hyperf\Utils\ApplicationContext;
+use Hyperf\Utils\ChannelPool;
 use Hyperf\Utils\Context;
 use RuntimeException;
-use Swoole\Coroutine\Client as SwooleClient;
 
 class GrpcTransporter implements TransporterInterface
 {
@@ -54,51 +58,51 @@ class GrpcTransporter implements TransporterInterface
     {
         $this->config = array_replace_recursive($this->config, $config);
 
-        $this->recvTimeout = $this->config['recv_timeout'] ?? 5.0;
+        $this->recvTimeout    = $this->config['recv_timeout'] ?? 5.0;
         $this->connectTimeout = $this->config['connect_timeout'] ?? 5.0;
     }
 
-    public function send(string $data)
+    public function send($data)
     {
-        $client = retry(2, function () use ($data) {
-            $client = $this->getClient();
-            if ($client->send($data) === false) {
-                if ($client->errCode == 104) {
-                    throw new RuntimeException('Connect to server failed.');
-                }
-            }
-            return $client;
-        });
+        throw new RuntimeException(__CLASS__ . ' does not support send method.');
+    }
 
-        return $this->recvAndCheck($client, $this->recvTimeout);
+    public function sendGrpc($data, $method, $deserialize)
+    {
+        $headers = [
+            'Service' => 'Hyperf service'
+        ];
+        $request = new Request($method, $data, $headers);
+
+        $streamId = $this->getClient()->send($request);
+        if ($streamId <= 0) {
+            throw new GrpcClientException('Failed to send the request to server', StatusCode::INTERNAL);
+        }
+        return Parser::parseResponse($this->getClient()->recv($streamId), $deserialize);
     }
 
     public function recv()
     {
-        $client = $this->getClient();
-
-        return $this->recvAndCheck($client, $this->recvTimeout);
+        throw new RuntimeException(__CLASS__ . ' does not support rev method.');
     }
 
-    public function getClient(): SwooleClient
+    public function getClient(): BaseClient
     {
         $class = spl_object_hash($this) . '.Connection';
         if (Context::has($class)) {
             return Context::get($class);
         }
 
-        return Context::set($class, retry(2, function () {
-            $client = new SwooleClient(SWOOLE_SOCK_TCP);
-            $client->set($this->config['settings'] ?? []);
-            $node = $this->getNode();
-            $result = $client->connect($node->host, $node->port, $this->connectTimeout);
-            if ($result === false && ($client->errCode == 114 or $client->errCode == 115)) {
-                // Force close and reconnect to server.
-                $client->close();
-                throw new RuntimeException('Connect to server failed.');
-            }
-            return $client;
-        }));
+        return Context::set(
+            $class,
+            retry(
+                2,
+                function () {
+                    $node = $this->getNode();
+                    return new BaseClient($node->host . ":" . $node->port, $this->config);
+                }
+            )
+        );
     }
 
     public function getLoadBalancer(): ?LoadBalancerInterface

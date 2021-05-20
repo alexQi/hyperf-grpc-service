@@ -15,9 +15,8 @@ namespace GrpcService\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
 use GrpcService\DataFormatter;
-use GrpcService\GrpcHttpTransporter;
 use GrpcService\Packer\GrpcPacker;
-use GrpcService\Packer\GrpcLengthPacker;
+use GrpcService\GrpcTransporter;
 use GrpcService\PathGenerator;
 use Hyperf\Rpc\ProtocolManager;
 
@@ -50,7 +49,7 @@ class RegisterProtocolListener implements ListenerInterface
             'grpc',
             [
                 'packer'         => GrpcPacker::class,
-                'transporter'    => GrpcHttpTransporter::class,
+                'transporter'    => GrpcTransporter::class,
                 'path-generator' => PathGenerator::class,
                 'data-formatter' => DataFormatter::class,
             ]
@@ -60,7 +59,7 @@ class RegisterProtocolListener implements ListenerInterface
             'grpc-tcp-length-check',
             [
                 'packer'         => GrpcPacker::class,
-                'transporter'    => GrpcHttpTransporter::class,
+                'transporter'    => GrpcTransporter::class,
                 'path-generator' => PathGenerator::class,
                 'data-formatter' => DataFormatter::class,
             ]
