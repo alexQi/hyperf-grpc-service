@@ -115,8 +115,8 @@ class ResponseBuilder
             self::INTERNAL_ERROR   => 'Internal error',
         ];
         $message = $mapping[$code] ?? "Unkown error";
-        if ($error) {
-            $message .= ',' . $error->getMessage();
+        if ($error && $error->getMessage()) {
+            $message = $error->getMessage();
         }
         return [(string)$code, $message];
     }
