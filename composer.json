@@ -10,14 +10,14 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": "^8.0",
     "google/protobuf": "^3.16",
-    "hyperf/contract": "~2.1.0",
-    "hyperf/http-message": "~2.1.0",
-    "hyperf/load-balancer": "~2.1.0",
-    "hyperf/rpc": "~2.1.0",
-    "hyperf/service-governance": "^2.1",
-    "hyperf/utils": "~2.1.0",
+    "hyperf/contract": "2.2.*",
+    "hyperf/http-message": "2.2.*",
+    "hyperf/load-balancer": "2.2.*",
+    "hyperf/rpc": "2.2.*",
+    "hyperf/service-governance": "2.2.*",
+    "hyperf/utils": "2.2.*",
     "psr/container": "^1.0",
     "psr/log": "^1.0"
   },
